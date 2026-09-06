@@ -178,7 +178,14 @@ main {
   .action-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 520px) {
-  .action-grid { grid-template-columns: 1fr; }
+  .action-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  /* Valet stays full-width and unmistakably the primary action;
+     the rest pair up so there's less scrolling to see them all. */
+  .action-tile--primary { grid-column: 1 / -1; }
+  .action-tile { min-height: 148px; padding: 18px 10px 16px; }
+  .action-icon { width: 46px; height: 46px; }
+  .action-label { font-size: calc(16.5px * var(--font-scale)); }
+  .action-sub { font-size: calc(13px * var(--font-scale)); }
 }
 
 .action-tile {
