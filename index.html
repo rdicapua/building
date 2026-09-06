@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Residence du Cap — Resident Portal (Redesign Concept)</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<!-- ============ ACCESSIBILITY TOOLBAR ============ -->
+<div class="a11y-bar" role="region" aria-label="Display settings">
+  <div class="a11y-bar-inner">
+    <span class="a11y-label">Text size:</span>
+    <button type="button" class="a11y-btn" data-font="normal" aria-pressed="true">A</button>
+    <button type="button" class="a11y-btn" data-font="large" aria-pressed="false">A</button>
+    <button type="button" class="a11y-btn" data-font="xlarge" aria-pressed="false">A</button>
+    <span class="a11y-divider" aria-hidden="true"></span>
+    <button type="button" class="a11y-btn a11y-contrast" id="contrastToggle" aria-pressed="false">
+      High contrast: <span id="contrastState">Off</span>
+    </button>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="building-id">
+      <div class="building-name">Residence du Cap</div>
+      <div class="building-sub">Resident Portal</div>
+    </div>
+    <div class="greeting">
+      <p>Good afternoon, <strong>Riccardo</strong> — Unit 14B</p>
+      <p class="today-date" id="todayDate"></p>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- ============ QUICK ACTIONS ============ -->
+  <section class="quick-actions" aria-labelledby="quick-actions-heading">
+    <h1 id="quick-actions-heading">What would you like to do?</h1>
+    <p class="section-intro">Tap a button below. Each one takes just a few seconds.</p>
+
+    <div class="action-grid">
+
+      <button type="button" class="action-tile action-tile--primary" data-modal="valetModal">
+        <span class="action-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><path d="M8 40 L14 24 Q16 18 24 18 H40 Q48 18 50 24 L56 40 V50 H48 V46 H16 V50 H8 Z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><circle cx="20" cy="46" r="5" fill="currentColor"/><circle cx="44" cy="46" r="5" fill="currentColor"/><rect x="20" y="24" width="24" height="10" rx="2" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="3"/></svg>
+        </span>
+        <span class="action-label">Request Valet</span>
+        <span class="action-sub">Bring my car around</span>
+      </button>
+
+      <button type="button" class="action-tile" data-modal="maintenanceModal">
+        <span class="action-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><path d="M41 8 L52 19 L46 25 L35 14 Z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M35 14 L14 35 L10 46 L21 42 L42 21 Z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M12 44 L20 52" stroke="currentColor" stroke-width="3.5"/></svg>
+        </span>
+        <span class="action-label">Report a Repair</span>
+        <span class="action-sub">Maintenance request</span>
+      </button>
+
+      <button type="button" class="action-tile" data-modal="amenityModal">
+        <span class="action-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><rect x="10" y="14" width="44" height="34" rx="3" fill="none" stroke="currentColor" stroke-width="3.5"/><line x1="10" y1="24" x2="54" y2="24" stroke="currentColor" stroke-width="3.5"/><line x1="20" y1="10" x2="20" y2="18" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><line x1="44" y1="10" x2="44" y2="18" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><circle cx="22" cy="36" r="3.5" fill="currentColor"/><circle cx="32" cy="36" r="3.5" fill="currentColor"/></svg>
+        </span>
+        <span class="action-label">Reserve a Space</span>
+        <span class="action-sub">Gym, pool, party room</span>
+      </button>
+
+      <button type="button" class="action-tile" data-modal="packagesModal">
+        <span class="action-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><path d="M32 8 L56 20 V44 L32 56 L8 44 V20 Z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M8 20 L32 32 L56 20" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><line x1="32" y1="32" x2="32" y2="56" stroke="currentColor" stroke-width="3.5"/></svg>
+        </span>
+        <span class="action-label">My Packages</span>
+        <span class="action-sub"><span id="packageCountLabel">2 waiting</span></span>
+        <span class="action-badge" id="packageBadge">2</span>
+      </button>
+
+      <button type="button" class="action-tile" data-modal="contactModal">
+        <span class="action-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><path d="M14 12 h10 l6 14 -7 5 a28 28 0 0 0 14 14 l5 -7 14 6 v10 a4 4 0 0 1 -4 4 C26 68 -4 38 10 16 a4 4 0 0 1 4 -4 Z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round" transform="translate(0,-2) scale(0.92)"/></svg>
+        </span>
+        <span class="action-label">Call Front Desk</span>
+        <span class="action-sub">Speak to staff now</span>
+      </button>
+
+      <button type="button" class="action-tile" data-modal="announcementsModal">
+        <span class="action-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><path d="M10 26 H22 L40 12 V52 L22 38 H10 Z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M46 22 a12 12 0 0 1 0 20" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></svg>
+        </span>
+        <span class="action-label">Announcements</span>
+        <span class="action-sub">Building notices</span>
+        <span class="action-badge action-badge--muted" id="announcementBadge">3 new</span>
+      </button>
+
+    </div>
+  </section>
+
+  <!-- ============ ANNOUNCEMENTS PREVIEW ============ -->
+  <section class="panel" aria-labelledby="announce-heading">
+    <div class="panel-header">
+      <h2 id="announce-heading">Latest Building Announcements</h2>
+    </div>
+    <ul class="announce-list">
+      <li>
+        <span class="announce-date">Sept 9</span>
+        <span class="announce-text"><strong>Elevator #2 maintenance</strong> — out of service 9am–1pm. Elevator #1 remains in service.</span>
+      </li>
+      <li>
+        <span class="announce-date">Sept 20</span>
+        <span class="announce-text"><strong>Board meeting</strong> — 7:00 PM in the Community Room. All residents welcome.</span>
+      </li>
+      <li>
+        <span class="announce-date">Sept 22</span>
+        <span class="announce-text"><strong>Package room hours extended</strong> — now open until 9:00 PM on weekdays.</span>
+      </li>
+    </ul>
+    <button type="button" class="text-link" data-modal="announcementsModal">See all announcements &rarr;</button>
+  </section>
+
+  <!-- ============ MY ACCOUNT ============ -->
+  <section class="panel panel--split" aria-labelledby="account-heading">
+    <div>
+      <h2 id="account-heading">My Account</h2>
+      <p class="muted">Maintenance fee balance</p>
+      <p class="big-number">$0.00 <span class="ok-chip">Paid in full</span></p>
+    </div>
+    <div class="panel-actions">
+      <a class="btn btn--secondary" href="#" onclick="return false;">View Payment History</a>
+      <a class="btn btn--secondary" href="#" onclick="return false;">Building Documents</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ EMERGENCY FOOTER ============ -->
+<footer class="site-footer">
+  <div class="emergency-bar">
+    <strong>Emergency?</strong> Call 911. &nbsp;|&nbsp; Building Security: <a href="tel:+15555550100">(555) 555-0100</a> (24 hours)
+  </div>
+  <div class="footer-links">
+    <span>Residence du Cap · 123 Harbor View Lane</span>
+    <a href="#" onclick="return false;">Front Desk: (555) 555-0110</a>
+    <a href="#" onclick="return false;">Property Manager</a>
+  </div>
+</footer>
+
+<!-- ============ MODALS ============ -->
+<div class="modal-overlay" id="modalOverlay">
+
+  <div class="modal" id="valetModal" role="dialog" aria-modal="true" aria-labelledby="valetTitle">
+    <button class="modal-close" aria-label="Close">&times;</button>
+    <h2 id="valetTitle">Request Valet</h2>
+    <form class="modal-form" data-confirm="Your car will be brought to the entrance. The valet team will text you when it's ready.">
+      <label>When do you need your car?
+        <select required>
+          <option value="">Choose one</option>
+          <option>Right now</option>
+          <option>In 15 minutes</option>
+          <option>In 30 minutes</option>
+          <option>Schedule for later today</option>
+        </select>
+      </label>
+      <label>Car description
+        <input type="text" placeholder="e.g. Silver Honda CR-V" required>
+      </label>
+      <label>Parking spot / ticket number
+        <input type="text" placeholder="e.g. B-114">
+      </label>
+      <button type="submit" class="btn btn--primary btn--full">Send Valet Request</button>
+    </form>
+  </div>
+
+  <div class="modal" id="maintenanceModal" role="dialog" aria-modal="true" aria-labelledby="maintTitle">
+    <button class="modal-close" aria-label="Close">&times;</button>
+    <h2 id="maintTitle">Report a Repair</h2>
+    <form class="modal-form" data-confirm="Thank you. Your request has been sent to the maintenance team. You'll get a call to confirm a time.">
+      <label>What needs fixing?
+        <select required>
+          <option value="">Choose one</option>
+          <option>Plumbing</option>
+          <option>Electrical</option>
+          <option>Appliance</option>
+          <option>Heating / Air Conditioning</option>
+          <option>Something else</option>
+        </select>
+      </label>
+      <label>Please describe the problem
+        <textarea rows="3" placeholder="Example: The kitchen faucet is leaking." required></textarea>
+      </label>
+      <label>How urgent is this?
+        <select>
+          <option>Routine — anytime this week</option>
+          <option>Urgent — needs attention today</option>
+        </select>
+      </label>
+      <label class="checkbox-row">
+        <input type="checkbox"> Maintenance staff may enter my unit if I'm not home
+      </label>
+      <button type="submit" class="btn btn--primary btn--full">Send Repair Request</button>
+    </form>
+  </div>
+
+  <div class="modal" id="amenityModal" role="dialog" aria-modal="true" aria-labelledby="amenityTitle">
+    <button class="modal-close" aria-label="Close">&times;</button>
+    <h2 id="amenityTitle">Reserve a Space</h2>
+    <form class="modal-form" data-confirm="Your reservation request has been sent. You'll receive a confirmation shortly.">
+      <label>Which space?
+        <select required>
+          <option value="">Choose one</option>
+          <option>Fitness Room</option>
+          <option>Pool</option>
+          <option>Party Room</option>
+          <option>Guest Suite</option>
+        </select>
+      </label>
+      <label>Date
+        <input type="date" required>
+      </label>
+      <label>Time
+        <select required>
+          <option value="">Choose one</option>
+          <option>9:00 AM – 11:00 AM</option>
+          <option>11:00 AM – 1:00 PM</option>
+          <option>1:00 PM – 3:00 PM</option>
+          <option>3:00 PM – 5:00 PM</option>
+          <option>5:00 PM – 7:00 PM</option>
+        </select>
+      </label>
+      <button type="submit" class="btn btn--primary btn--full">Send Reservation Request</button>
+    </form>
+  </div>
+
+  <div class="modal" id="packagesModal" role="dialog" aria-modal="true" aria-labelledby="packagesTitle">
+    <button class="modal-close" aria-label="Close">&times;</button>
+    <h2 id="packagesTitle">My Packages</h2>
+    <ul class="plain-list">
+      <li><strong>2 packages</strong> are waiting for you at the front desk.</li>
+      <li>Arrived Sept 5 — from Amazon (small box)</li>
+      <li>Arrived Sept 4 — from FedEx (envelope)</li>
+    </ul>
+    <p class="muted">Front desk hours: 7:00 AM – 9:00 PM daily.</p>
+    <button type="button" class="btn btn--secondary btn--full modal-dismiss">Close</button>
+  </div>
+
+  <div class="modal" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+    <button class="modal-close" aria-label="Close">&times;</button>
+    <h2 id="contactTitle">Contact the Building</h2>
+    <div class="contact-list">
+      <a class="contact-row" href="tel:+15555550110">
+        <span>📞 Front Desk</span><strong>(555) 555-0110</strong>
+      </a>
+      <a class="contact-row" href="tel:+15555550100">
+        <span>🛎️ Security (24 hrs)</span><strong>(555) 555-0100</strong>
+      </a>
+      <a class="contact-row" href="mailto:manager@residenceducap.example">
+        <span>✉️ Property Manager</span><strong>Send Email</strong>
+      </a>
+    </div>
+    <button type="button" class="btn btn--secondary btn--full modal-dismiss">Close</button>
+  </div>
+
+  <div class="modal modal--wide" id="announcementsModal" role="dialog" aria-modal="true" aria-labelledby="announceModalTitle">
+    <button class="modal-close" aria-label="Close">&times;</button>
+    <h2 id="announceModalTitle">All Announcements</h2>
+    <ul class="announce-list">
+      <li><span class="announce-date">Sept 9</span><span class="announce-text"><strong>Elevator #2 maintenance</strong> — out of service 9am–1pm.</span></li>
+      <li><span class="announce-date">Sept 20</span><span class="announce-text"><strong>Board meeting</strong> — 7:00 PM, Community Room.</span></li>
+      <li><span class="announce-date">Sept 22</span><span class="announce-text"><strong>Package room hours extended</strong> — open until 9:00 PM weekdays.</span></li>
+      <li><span class="announce-date">Sept 1</span><span class="announce-text"><strong>Fall fire drill</strong> — scheduled for Sept 30, 10:00 AM.</span></li>
+      <li><span class="announce-date">Aug 28</span><span class="announce-text"><strong>Lobby carpet cleaning</strong> — completed, thank you for your patience.</span></li>
+    </ul>
+    <button type="button" class="btn btn--secondary btn--full modal-dismiss">Close</button>
+  </div>
+
+  <div class="modal" id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+    <h2 id="confirmTitle">✅ Request Sent</h2>
+    <p id="confirmMessage" class="confirm-message"></p>
+    <button type="button" class="btn btn--primary btn--full modal-dismiss">Done</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
